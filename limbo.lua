@@ -1,4 +1,4 @@
-local a,b,c,d,e=game:GetService("CoreGui"),game:GetService("Players").LocalPlayer,game:GetService("TweenService"),"https://limbohub.my.id/",24*3600 
+local a,b,c,d,e=game:GetService("CoreGui"),game:GetService("Players").LocalPlayer,game:GetService("TweenService"),"https://link4m.net/WMuZuX",24*3600 
 getgenv().LimboData=getgenv().LimboData or{SavedKey="",TimeLeft=0,IsRunning=false}
 local function f() 
     if a:FindFirstChild("LimboHubKeySystem") then a.LimboHubKeySystem:Destroy() end 
@@ -20,7 +20,7 @@ local function f()
         c:Create(j,TweenInfo.new(0.4),{TextTransparency=0}):Play() 
         c:Create(k,TweenInfo.new(0.4),{BackgroundTransparency=0,TextTransparency=0}):Play() 
         c:Create(l,TweenInfo.new(0.4),{BackgroundTransparency=0,TextTransparency=0}):Play() 
-        c:Create(m,TweenInfo.new(0.4),{TextTransparency=0}):Play() 
+        c:Create(m,TweenInfo.new(0.4),{BackgroundTransparency=0,TextTransparency=0}):Play() 
     end) 
     m.MouseButton1Click:Connect(function() 
         if setclipboard then setclipboard(d) m.Text="Đã copy link!" task.wait(1.5) m.Text="Lấy Key" end 
@@ -55,7 +55,7 @@ local function n()
     Instance.new("UICorner",h).CornerRadius=UDim.new(0,6) 
     if not getgenv().LimboData.IsRunning then 
         getgenv().LimboData.IsRunning=true 
-        pcall(function() loadstring(game:HttpGet(d.."loader.lua"))() end) 
+        pcall(function() loadstring(game:HttpGet("https://limbohub.my.id/loader.lua"))() end) 
     end 
     task.spawn(function() 
         while getgenv().LimboData.TimeLeft>0 do 
