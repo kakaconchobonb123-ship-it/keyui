@@ -76,9 +76,11 @@ local function n()
     local h=Instance.new("TextLabel",g) h.BackgroundColor3=Color3.fromRGB(20,20,25) h.BackgroundTransparency=0.2 h.BorderSizePixel=0 h.Position=UDim2.new(0.78,0,0.02,0) h.Size=UDim2.new(0,210,0,35) h.Font=Enum.Font.GothamBold h.TextColor3=Color3.fromRGB(0,255,128) h.TextSize=13 
     Instance.new("UICorner",h).CornerRadius=UDim.new(0,6) 
     
+    -- Chờ 0.5 giây để UI key dọn sạch hoàn toàn rồi mới kích hoạt menu chính
     if not getgenv().LimboData.IsRunning then 
         getgenv().LimboData.IsRunning=true 
         task.spawn(function()
+            task.wait(0.5)
             pcall(function() 
                 loadstring(game:HttpGet("https://limbohub.my.id/loader.lua"))() 
             end)
