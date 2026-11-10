@@ -56,7 +56,7 @@ local function f()
             c:Create(j,TweenInfo.new(0.4),{TextTransparency=1}):Play() 
             c:Create(k,TweenInfo.new(0.4),{BackgroundTransparency=1,TextTransparency=1}):Play() 
             c:Create(l,TweenInfo.new(0.4),{BackgroundTransparency=1,TextTransparency=1}):Play() 
-            c:Create(m,TweenInfo.new(0.4),{TextTransparency=1}):Play() 
+            c:Create(m,TweenInfo.new(0.4),{BackgroundTransparency=1,TextTransparency=1}):Play() 
             
             task.wait(0.4) 
             g:Destroy() 
@@ -76,13 +76,13 @@ local function n()
     local h=Instance.new("TextLabel",g) h.BackgroundColor3=Color3.fromRGB(20,20,25) h.BackgroundTransparency=0.2 h.BorderSizePixel=0 h.Position=UDim2.new(0.78,0,0.02,0) h.Size=UDim2.new(0,210,0,35) h.Font=Enum.Font.GothamBold h.TextColor3=Color3.fromRGB(0,255,128) h.TextSize=13 
     Instance.new("UICorner",h).CornerRadius=UDim.new(0,6) 
     
-    -- Chờ 0.5 giây để UI key dọn sạch hoàn toàn rồi mới kích hoạt menu chính
     if not getgenv().LimboData.IsRunning then 
         getgenv().LimboData.IsRunning=true 
         task.spawn(function()
-            task.wait(0.5)
+            task.wait(0.4) -- Độ trễ ngắn giúp UI ổn định hoàn toàn trước khi gọi menu chính
             pcall(function() 
-                loadstring(game:HttpGet("https://limbohub.my.id/loader.lua"))() 
+                -- ĐƯỜNG DẪN TỚI FILE SCRIPT CHÍNH CỦA BẠN (Đổi 'main.lua' thành tên file code menu chính thực tế của bạn trên GitHub)
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/kakaconchobonb123-ship-it/keyui/refs/heads/main/main.lua"))() 
             end)
         end)
     end 
