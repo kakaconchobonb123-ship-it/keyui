@@ -10,7 +10,6 @@ local function LaunchMainHub()
     if getgenv().LimboData.IsRunning then return end
     getgenv().LimboData.IsRunning = true
 
-    -- Tải sẵn code từ auradt.site qua mạng
     local success, mainScript = pcall(function()
         return game:HttpGet("https://auradt.site/script=vnhub.lua")
     end)
@@ -52,23 +51,13 @@ local function ShowKeyUI()
     
     local title = Instance.new("TextLabel", frame)
     title.BackgroundTransparency = 1
-    title.Position = UDim2.new(0, 0, 0, 35)
+    title.Position = UDim2.new(0, 0, 0, 45)
     title.Size = UDim2.new(1, 0, 0, 35)
     title.Font = Enum.Font.GothamBold
     title.Text = "VN HUB - NHẬP KEY"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextSize = 22
     title.TextTransparency = 1
-    
-    local desc = Instance.new("TextLabel", frame)
-    desc.BackgroundTransparency = 1
-    desc.Position = UDim2.new(0, 0, 0, 75)
-    desc.Size = UDim2.new(1, 0, 0, 20)
-    desc.Font = Enum.Font.Gotham
-    desc.Text = "Vui lòng nhập Key định dạng VN_HUB-... để tiếp tục."
-    desc.TextColor3 = Color3.fromRGB(160, 160, 160)
-    desc.TextSize = 13
-    desc.TextTransparency = 1
     
     local textBox = Instance.new("TextBox", frame)
     textBox.BackgroundColor3 = Color3.fromRGB(28, 25, 30)
@@ -77,7 +66,7 @@ local function ShowKeyUI()
     textBox.Position = UDim2.new(0.1, 0, 0.42, 0)
     textBox.Size = UDim2.new(0.8, 0, 0, 45)
     textBox.Font = Enum.Font.Gotham
-    textBox.PlaceholderText = "Nhập Key tại đây (VN_HUB-...)..."
+    textBox.PlaceholderText = "Nhập Key tại đây..."
     textBox.Text = ""
     textBox.TextColor3 = Color3.fromRGB(255, 255, 255)
     textBox.PlaceholderColor3 = Color3.fromRGB(120, 120, 120)
@@ -116,9 +105,8 @@ local function ShowKeyUI()
     
     -- Hiệu ứng hiện bảng Key nhanh gọn
     task.spawn(function() 
-        TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0, 420, 0, 240), BackgroundTransparency = 0.05}):Play() 
+        TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0, 420, 0, 220), BackgroundTransparency = 0.05}):Play() 
         TweenService:Create(title, TweenInfo.new(0.3), {TextTransparency = 0}):Play() 
-        TweenService:Create(desc, TweenInfo.new(0.3), {TextTransparency = 0}):Play() 
         TweenService:Create(textBox, TweenInfo.new(0.3), {BackgroundTransparency = 0, TextTransparency = 0}):Play() 
         TweenService:Create(btnVerify, TweenInfo.new(0.3), {BackgroundTransparency = 0, TextTransparency = 0}):Play() 
         TweenService:Create(btnGet, TweenInfo.new(0.3), {BackgroundTransparency = 0, TextTransparency = 0}):Play() 
@@ -136,7 +124,6 @@ local function ShowKeyUI()
     btnVerify.MouseButton1Click:Connect(function() 
         local userKey = textBox.Text 
         local isValid = false 
-        -- Kiểm tra key định dạng: VN_HUB-[ngẫu nhiên]-[71 hoặc 92 hoặc 13]
         if string.match(userKey, "^VN_HUB%-.+%-([0-9]+)$") then 
             local num = tonumber(string.match(userKey, "%-([0-9]+)$")) 
             if num == 71 or num == 92 or num == 13 then isValid = true end 
@@ -147,7 +134,6 @@ local function ShowKeyUI()
             getgenv().LimboData.SavedKey = userKey 
             getgenv().LimboData.TimeLeft = CountdownTime 
             
-            -- Xóa nhanh bảng Key ngay lập tức
             screenGui:Destroy() 
             StartTimerAndHub() 
         else 
@@ -179,10 +165,8 @@ function StartTimerAndHub()
     timerLabel.TextSize = 13
     Instance.new("UICorner", timerLabel).CornerRadius = UDim.new(0, 6) 
     
-    -- Gọi menu chính lên từ auradt.site cực nhanh không độ trễ
     LaunchMainHub()
     
-    -- Vòng lặp đếm ngược thời gian
     task.spawn(function() 
         while getgenv().LimboData.TimeLeft > 0 do 
             local timeLeft = getgenv().LimboData.TimeLeft 
