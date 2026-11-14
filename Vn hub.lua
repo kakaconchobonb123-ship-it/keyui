@@ -122,11 +122,16 @@ local function ShowKeyUI()
     end) 
     
     btnVerify.MouseButton1Click:Connect(function() 
-        local userKey = textBox.Text 
+        -- Tự động xóa khoảng trắng thừa nếu có lỡ copy dính
+        local userKey = textBox.Text:gsub("^%s*(.-)%s*$", "%1") 
         local isValid = false 
-        if string.match(userKey, "^VN_HUB%-.+%-([0-9]+)$") then 
-            local num = tonumber(string.match(userKey, "%-([0-9]+)$")) 
-            if num == 71 or num == 92 or num == 13 then isValid = true end 
+        
+        -- HÀM KIỂM TRA KEY ĐÃ ĐƯỢC FIX CHUẨN XÁC TUYỆT ĐỐI
+        if userKey:sub(1, 7) == "VN_HUB-" then
+            local suffix = tonumber(userKey:match(".*%-(%d+)$"))
+            if suffix == 71 or suffix == 92 or suffix == 13 then 
+                isValid = true 
+            end 
         end 
         
         if isValid then 
@@ -188,9 +193,11 @@ local savedKey = getgenv().LimboData.SavedKey
 local timeLeft = getgenv().LimboData.TimeLeft 
 local isKeyValid = false 
 
-if savedKey ~= "" and string.match(savedKey, "^VN_HUB%-.+%-([0-9]+)$") then 
-    local num = tonumber(string.match(savedKey, "%-([0-9]+)$")) 
-    if num == 71 or num == 92 or num == 13 then isKeyValid = true end 
+if savedKey ~= "" and savedKey:sub(1, 7) == "VN_HUB-" then 
+    local suffix = tonumber(savedKey:match(".*%-(%d+)$"))
+    if suffix == 71 or suffix == 92 or suffix == 13 then 
+        isKeyValid = true 
+    end 
 end 
 
 if isKeyValid and timeLeft > 0 then 
